@@ -10,7 +10,7 @@ const D3Globe: React.FC = () => {
 
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const sensitivity = 75;
+    const sensitivity = 150;
 
     // Create SVG container
     const svg = d3.select(svgRef.current)
@@ -43,28 +43,29 @@ const D3Globe: React.FC = () => {
       .style('stroke-width', 0.5)
       .style('stroke-opacity', 0.3);
 
+    // Add ocean background
+    globe.append('path')
+      .datum({ type: 'Sphere' } as d3.GeoSphere)
+      .attr('class', 'ocean')
+      .attr('d', path)
+      .style('fill', '#1a5276')
+      .style('stroke', 'none');
+
     // Load and draw world map
-    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    d3.json('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
       .then((data: any) => {
         const countries = topojson.feature(data, data.objects.countries);
+        
+        // Draw countries
         globe.append('path')
           .datum(countries)
           .attr('class', 'countries')
           .attr('d', path)
-          .style('fill', '#2c3e50')
-          .style('stroke', '#34495e')
+          .style('fill', '#d2b48c')
+          .style('stroke', '#808080')
           .style('stroke-width', 0.5);
 
         // Add Golden Gate Bridge marker
-        const goldenGate = {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [-122.4783, 37.8199] // Golden Gate Bridge coordinates
-          }
-        };
-
-        // Add marker
         const marker = globe.append('g')
           .attr('class', 'marker')
           .attr('transform', `translate(${projection([-122.4783, 37.8199])})`);
@@ -72,7 +73,9 @@ const D3Globe: React.FC = () => {
         // Add circle
         marker.append('circle')
           .attr('r', 5)
-          .style('fill', '#e74c3c');
+          .style('fill', '#e74c3c')
+          .style('stroke', 'white')
+          .style('stroke-width', 1);
 
         // Add text bubble
         const bubble = marker.append('g')
@@ -95,10 +98,11 @@ const D3Globe: React.FC = () => {
           .attr('text-anchor', 'middle')
           .attr('dy', '0.3em')
           .style('fill', '#2c3e50')
-          .style('font-size', '12px');
+          .style('font-size', '12px')
+          .style('font-weight', 'bold');
 
         // Add rotation interaction
-        let rotation = [0, 0];
+        let rotation: [number, number, number] = [0, 0, 0];
         let isDragging = false;
 
         svg.on('mousedown', () => {

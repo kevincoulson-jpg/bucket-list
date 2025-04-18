@@ -51,17 +51,31 @@ const D3Globe: React.FC = () => {
       .style('fill', '#1a5276')
       .style('stroke', 'none');
 
+    // Create pattern for texture
+    const pattern = svg.append('defs')
+      .append('pattern')
+      .attr('id', 'earth-texture')
+      .attr('patternUnits', 'userSpaceOnUse')
+      .attr('width', 2048)
+      .attr('height', 1024);
+
+    // Add texture image
+    pattern.append('image')
+      .attr('xlink:href', 'https://raw.githubusercontent.com/d3/d3-geo/master/img/earth-topology.png')
+      .attr('width', 2048)
+      .attr('height', 1024);
+
     // Load and draw world map
     d3.json('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
       .then((data: any) => {
         const countries = topojson.feature(data, data.objects.countries);
         
-        // Draw countries
+        // Draw countries with texture
         globe.append('path')
           .datum(countries)
           .attr('class', 'countries')
           .attr('d', path)
-          .style('fill', '#d2b48c')
+          .style('fill', 'url(#earth-texture)')
           .style('stroke', '#808080')
           .style('stroke-width', 0.5);
 

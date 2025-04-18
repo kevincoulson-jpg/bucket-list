@@ -18,7 +18,7 @@ const MapboxGlobe: React.FC = () => {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/satellite-v9',
       projection: 'globe',
-      center: [0, 0],
+      center: [-122.4783, 37.8199], // Golden Gate Bridge coordinates
       zoom: 1.5
     });
 
@@ -29,6 +29,26 @@ const MapboxGlobe: React.FC = () => {
           'high-color': 'rgb(36, 92, 223)',
           'horizon-blend': 0.02
         });
+
+        // Add marker for Golden Gate Bridge
+        const marker = new mapboxgl.Marker({
+          color: '#e74c3c',
+          scale: 0.8
+        })
+          .setLngLat([-122.4783, 37.8199])
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 })
+              .setHTML(`
+                <div style="padding: 10px;">
+                  <h3 style="margin: 0 0 5px 0;">Golden Gate Bridge</h3>
+                  <p style="margin: 0;">San Francisco, California</p>
+                </div>
+              `)
+          )
+          .addTo(map.current);
+
+        // Open popup by default
+        marker.togglePopup();
       }
     });
 

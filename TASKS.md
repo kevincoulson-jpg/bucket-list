@@ -3,19 +3,19 @@
 As you complete tasks and reference relevant files, update this document as our memory to help with future tasks
 
 ## 1. Project Setup and Planning
-   - [ ] 1.1. Define Project Requirements
-      - [ ] 1.1.1. Document user stories and features
-         - [ ] Create user story templates for each major feature
-         - [ ] Document core user flows (registration, adding locations, viewing globe)
-         - [ ] Define success criteria for each feature
+   - [x] 1.1. Define Project Requirements
+      - [x] 1.1.1. Document user stories and features
+         - [x] Create user story templates for each major feature -> Created in PRD.md
+         - [x] Document core user flows (registration, adding locations, viewing globe) -> Documented in PRD.md
+         - [x] Define success criteria for each feature -> Defined in PRD.md
       - [ ] 1.1.2. Create wireframes for key pages (home, map view, location details)
          - [ ] Sketch initial wireframes for desktop view
          - [ ] Create mobile-responsive wireframes
          - [ ] Design user flow diagrams
-      - [ ] 1.1.3. Determine data structure for bucket list locations
-         - [ ] Define location data model (coordinates, name, description, etc.)
-         - [ ] Design media attachment structure
-         - [ ] Plan status tracking fields
+      - [x] 1.1.3. Determine data structure for bucket list locations
+         - [x] Define location data model (coordinates, name, description, etc.) -> Defined in DATA_MODEL.md
+         - [x] Design media attachment structure -> Defined in DATA_MODEL.md
+         - [x] Plan status tracking fields -> Defined in DATA_MODEL.md
    
    - [x] 1.2. Setup Development Environment
       - [x] 1.2.1. Install development tools (code editor, Git)
@@ -31,19 +31,18 @@ As you complete tasks and reference relevant files, update this document as our 
          - [x] Create backend directory structure
          - [x] Setup configuration files
    
-   - [ ] 1.3. Technology Stack Selection
-      - [x] 1.3.1. Choose frontend framework (React recommended)
+   - [x] 1.3. Technology Stack Selection
+      - [x] 1.3.1. Choose frontend framework (React with TypeScript)
          - [x] Compare React vs alternatives -> Selected React for component-based architecture and large ecosystem
          - [x] Select UI component library -> Using Material-UI for consistent design system
          - [x] Choose state management solution -> Using React Context API for simpler state management
-      - [x] 1.3.2. Select 3D globe library (Three.js with Globe.GL or React Globe.GL)
-         - [x] Compare performance of different globe libraries -> Selected Three.js for full control and customization
-         - [x] Test marker rendering capabilities -> Confirmed Three.js supports custom marker rendering
-         - [x] Evaluate animation support -> Three.js provides robust animation system
-         - [x] Implement basic globe component with Three.js
-         - [x] Setup scene, camera, and renderer
-         - [x] Add basic globe geometry and materials
-         - [x] Implement rotation animation
+      - [x] 1.3.2. Select 3D globe library (Mapbox GL JS)
+         - [x] Compare performance of different globe libraries -> Selected Mapbox for superior performance and built-in features
+         - [x] Test marker rendering capabilities -> Confirmed Mapbox supports custom markers and popups
+         - [x] Evaluate animation support -> Mapbox provides smooth transitions and animations
+         - [x] Implement basic globe component with Mapbox
+         - [x] Setup map configuration and styling
+         - [x] Add marker and popup functionality
       - [x] 1.3.3. Choose backend technology (Node.js/Express)
          - [x] Select Express.js version -> Using Express.js v4.18.2
          - [x] Choose middleware packages -> Using express, cors, dotenv, mongoose
@@ -105,51 +104,51 @@ As you complete tasks and reference relevant files, update this document as our 
          - [ ] Test on multiple devices
 
 ## 3. Interactive 3D Globe Development
-   - [x] 3.1. Setup Three.js Environment
-      - [x] 3.1.1. Install Three.js and supporting libraries
-         - [x] Install core Three.js -> Using Three.js v0.159.0
-         - [x] Add OrbitControls -> Implemented for camera control
-         - [x] Setup GLTF loader -> Added for future 3D model support
+   - [x] 3.1. Setup Mapbox Environment
+      - [x] 3.1.1. Install Mapbox GL JS and dependencies
+         - [x] Install core Mapbox GL JS -> Using Mapbox GL JS v3.11.0
+         - [x] Setup TypeScript types -> Added @types/mapbox-gl
+         - [x] Configure access token -> Set up secure token management
       - [x] 3.1.2. Create basic globe component
-         - [x] Setup scene and camera -> Implemented in Globe.tsx
-         - [x] Create sphere geometry -> Using SphereGeometry with radius 5
-         - [x] Add basic lighting -> Using AmbientLight and DirectionalLight
+         - [x] Setup map container and configuration -> Implemented in MapboxGlobe.tsx
+         - [x] Configure globe projection -> Using Mapbox's built-in globe projection
+         - [x] Add basic styling -> Using satellite style with custom fog
       - [x] 3.1.3. Add camera controls for rotation and zoom
-         - [x] Implement smooth rotation -> Using OrbitControls
-         - [x] Add zoom constraints -> Set min/max distance
-         - [x] Create animation system -> Using requestAnimationFrame
+         - [x] Implement smooth rotation -> Using Mapbox's built-in controls
+         - [x] Add zoom constraints -> Set min/max zoom levels
+         - [x] Configure initial view -> Set to Golden Gate Bridge
    
    - [ ] 3.2. Globe Visualization Features
-      - [ ] 3.2.1. Implement earth texture and atmosphere
-         - [ ] Load high-res earth texture
-         - [ ] Add atmosphere shader
-         - [ ] Implement day/night cycle
+      - [ ] 3.2.1. Implement custom map style
+         - [ ] Design custom style for bucket list locations
+         - [ ] Add terrain and elevation data
+         - [ ] Configure lighting and atmosphere
       - [ ] 3.2.2. Add location markers rendering
-         - [ ] Create marker geometry
-         - [ ] Implement marker placement
-         - [ ] Add marker labels
+         - [ ] Create custom marker design
+         - [ ] Implement marker clustering
+         - [ ] Add marker animations
       - [ ] 3.2.3. Implement marker clustering for dense areas
-         - [ ] Design clustering algorithm
-         - [ ] Create cluster visualization
+         - [ ] Configure cluster radius
+         - [ ] Design cluster visualization
          - [ ] Add cluster interaction
       - [ ] 3.2.4. Add hover effects for location markers
-         - [ ] Implement raycasting
+         - [ ] Implement hover state
          - [ ] Create hover animations
          - [ ] Add tooltip system
    
-   - [ ] 3.3. Globe Interaction
+   - [ ] 3.3. Interactive Features
       - [ ] 3.3.1. Implement click handling for markers
          - [ ] Add click detection
          - [ ] Create click animations
          - [ ] Show location details
       - [ ] 3.3.2. Create smooth camera transitions between locations
-         - [ ] Implement path finding
+         - [ ] Implement flyTo animations
          - [ ] Add easing functions
          - [ ] Handle edge cases
       - [ ] 3.3.3. Add animation for completed vs. pending locations
          - [ ] Design status indicators
          - [ ] Create transition effects
-         - [ ] Add particle effects
+         - [ ] Add completion animations
       - [ ] 3.3.4. Implement filters for location categories
          - [ ] Create filter UI
          - [ ] Add filter logic

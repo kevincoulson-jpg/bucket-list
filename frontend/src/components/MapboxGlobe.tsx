@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // You'll need to replace this with your own Mapbox token
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2V2aW5jMjYiLCJhIjoiY205bmIwYjYwMG81dDJscTdyM3huN29pYSJ9.Tc5ScSg4xTPWJptsrdCLsA';
 
-const Globe: React.FC = () => {
+const MapboxGlobe: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -53,4 +53,4 @@ const Globe: React.FC = () => {
   );
 };
 
-export default Globe; 
+export default MapboxGlobe; 

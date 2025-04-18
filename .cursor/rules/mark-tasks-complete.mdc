@@ -7,3 +7,4 @@ alwaysApply: true
 # Your rule content
 
 - Every time you complete a task from TASKS.md, check the markdown box to show completion.
+- always run terminal commands one at a time

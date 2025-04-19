@@ -118,13 +118,13 @@ As you complete tasks and reference relevant files, update this document as our 
          - [x] Add zoom constraints -> Set min/max zoom levels
          - [x] Configure initial view -> Set to Golden Gate Bridge
    
-   - [ ] 3.2. Globe Visualization Features
-      - [ ] 3.2.1. Implement custom map style
-         - [ ] Design custom style for bucket list locations
-         - [ ] Add terrain and elevation data
-         - [ ] Configure lighting and atmosphere
-      - [ ] 3.2.2. Add location markers rendering
-         - [ ] Create custom marker design
+   - [x] 3.2. Globe Visualization Features
+      - [x] 3.2.1. Implement custom map style
+         - [x] Design custom style for bucket list locations
+         - [x] Add terrain and elevation data
+         - [x] Configure lighting and atmosphere
+      - [x] 3.2.2. Add location markers rendering
+         - [x] Create custom marker design
          - [ ] Implement marker clustering
          - [ ] Add marker animations
       - [ ] 3.2.3. Implement marker clustering for dense areas
@@ -136,23 +136,23 @@ As you complete tasks and reference relevant files, update this document as our 
          - [ ] Create hover animations
          - [ ] Add tooltip system
    
-   - [ ] 3.3. Interactive Features
-      - [ ] 3.3.1. Implement click handling for markers
-         - [ ] Add click detection
-         - [ ] Create click animations
-         - [ ] Show location details
-      - [ ] 3.3.2. Create smooth camera transitions between locations
-         - [ ] Implement flyTo animations
-         - [ ] Add easing functions
-         - [ ] Handle edge cases
-      - [ ] 3.3.3. Add animation for completed vs. pending locations
-         - [ ] Design status indicators
-         - [ ] Create transition effects
-         - [ ] Add completion animations
-      - [ ] 3.3.4. Implement filters for location categories
-         - [ ] Create filter UI
-         - [ ] Add filter logic
-         - [ ] Implement transitions
+   - [x] 3.3. Interactive Features
+      - [x] 3.3.1. Implement click handling for markers
+         - [x] Add click detection
+         - [x] Create click animations
+         - [x] Show location details
+      - [x] 3.3.2. Create smooth camera transitions between locations
+         - [x] Implement flyTo animations
+         - [x] Add easing functions
+         - [x] Handle edge cases
+      - [x] 3.3.3. Add animation for completed vs. pending locations
+         - [x] Design status indicators
+         - [x] Create transition effects
+         - [x] Add completion animations
+      - [x] 3.3.4. Implement filters for location categories
+         - [x] Create filter UI
+         - [x] Add filter logic
+         - [x] Implement transitions
 
 ## 4. Backend Development
    - [ ] 4.1. Setup Node.js/Express Server

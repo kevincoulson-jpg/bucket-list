@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -30,6 +30,7 @@ interface MapboxGlobeProps {
   activities: Activity[];
   selectedActivityId: string | null;
   onActivitySelect: (activity: Activity) => void;
+  previewLocation?: [number, number];
 }
 
 const MapboxGlobe: React.FC<MapboxGlobeProps> = ({ activities, selectedActivityId, onActivitySelect }) => {
@@ -37,6 +38,38 @@ const MapboxGlobe: React.FC<MapboxGlobeProps> = ({ activities, selectedActivityI
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
   const animationTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Function to add markers to the map
+  const addMarkers = (mapInstance: mapboxgl.Map) => {
+    // Clear existing markers
+    markers.current.forEach(marker => marker.remove());
+    markers.current = [];
+
+    // Add new markers
+    activities.forEach(activity => {
+      const marker = new mapboxgl.Marker({
+        color: activity.status === 'completed' ? '#4CAF50' : '#e74c3c',
+        scale: 0.8
+      })
+        .setLngLat([activity.coordinates.longitude, activity.coordinates.latitude])
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 })
+            .setHTML(`
+              <div style="padding: 10px;">
+                <h3 style="margin: 0 0 5px 0;">${activity.name}</h3>
+                <p style="margin: 0;">${activity.metadata.elevation} • ${activity.metadata.grade}</p>
+              </div>
+            `)
+        )
+        .addTo(mapInstance);
+
+      marker.getElement().addEventListener('click', () => {
+        onActivitySelect(activity);
+      });
+
+      markers.current.push(marker);
+    });
+  };
 
   // Initialize map only once
   useEffect(() => {
@@ -59,6 +92,8 @@ const MapboxGlobe: React.FC<MapboxGlobeProps> = ({ activities, selectedActivityI
         'horizon-blend': 0.02
       });
       map.current = newMap;
+      // Add markers immediately after map is loaded
+      addMarkers(newMap);
     });
 
     return () => {
@@ -68,38 +103,10 @@ const MapboxGlobe: React.FC<MapboxGlobeProps> = ({ activities, selectedActivityI
     };
   }, []);
 
-  // Add markers when map is ready and activities change
+  // Update markers when activities change
   useEffect(() => {
     if (!map.current) return;
-
-    // Clear existing markers
-    markers.current.forEach(marker => marker.remove());
-    markers.current = [];
-
-    // Add new markers
-    activities.forEach(activity => {
-      const marker = new mapboxgl.Marker({
-        color: activity.status === 'completed' ? '#4CAF50' : '#e74c3c',
-        scale: 0.8
-      })
-        .setLngLat([activity.coordinates.longitude, activity.coordinates.latitude])
-        .setPopup(
-          new mapboxgl.Popup({ offset: 25 })
-            .setHTML(`
-              <div style="padding: 10px;">
-                <h3 style="margin: 0 0 5px 0;">${activity.name}</h3>
-                <p style="margin: 0;">${activity.metadata.elevation} • ${activity.metadata.grade}</p>
-              </div>
-            `)
-        )
-        .addTo(map.current);
-
-      marker.getElement().addEventListener('click', () => {
-        onActivitySelect(activity);
-      });
-
-      markers.current.push(marker);
-    });
+    addMarkers(map.current);
   }, [activities, onActivitySelect]);
 
   // Handle selected activity changes
